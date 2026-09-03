@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara Shafiee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f5f0;
+    --ink:#1d2124;
+    --muted:#63676b;
+    --teal:#1f5c58;
+    --brass:#a1723f;
+    --line:#d9d6cb;
+    --paper-raised:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    margin:0;
+  }
+  a{color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(31,92,88,0.3);}
+  a:hover{border-bottom-color:var(--teal);}
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Header / blueprint hero ---- */
+  header.hero{
+    position:relative;
+    padding:88px 0 64px;
+    background:
+      linear-gradient(var(--paper), var(--paper)),
+      repeating-linear-gradient(0deg, rgba(31,92,88,0.06) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, rgba(31,92,88,0.06) 0 1px, transparent 1px 44px);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    max-width:760px; margin:0 auto; padding:0 24px;
+    display:grid; grid-template-columns:120px 1fr; gap:32px; align-items:center;
+  }
+  .avatar{
+    width:120px; height:120px; border-radius:4px;
+    object-fit:cover;
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+  }
+  .hero-text h1{font-size:2.1rem; letter-spacing:-0.01em;}
+  .hero-role{color:var(--muted); font-size:1.02rem; margin-top:6px;}
+  .hero-role strong{color:var(--ink); font-weight:500;}
+
+  @media (max-width:560px){
+    .hero-inner{grid-template-columns:80px 1fr; gap:20px;}
+    .avatar{width:80px; height:80px;}
+    .hero-text h1{font-size:1.6rem;}
+  }
+
+  /* ---- Nav links row ---- */
+  .links-row{
+    display:flex; flex-wrap:wrap; gap:6px 18px;
+    padding:18px 0 0;
+    font-size:0.92rem;
+  }
+  .links-row a{border-bottom:1px solid var(--line); color:var(--ink);}
+  .links-row a:hover{border-bottom-color:var(--teal); color:var(--teal);}
+
+  /* ---- Sections ---- */
+  main{padding:56px 0 40px;}
+  section{margin-bottom:52px;}
+  section h2{
+    font-size:1.3rem;
+    color:var(--teal);
+    margin-bottom:18px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  p{margin:0 0 14px; max-width:66ch;}
+  .muted{color:var(--muted);}
+
+  /* ---- Highlights strip ---- */
+  .highlights{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:8px;
+  }
+  .highlight-cell{
+    background:var(--paper-raised);
+    padding:18px 20px;
+  }
+  .highlight-cell .num{font-family:'Source Serif 4',serif; font-size:1.6rem; color:var(--brass);}
+  .highlight-cell .label{font-size:0.85rem; color:var(--muted); margin-top:2px;}
+  @media (max-width:560px){ .highlights{grid-template-columns:1fr 1fr;} }
+
+  /* ---- Timeline-style lists (positions, education) ---- */
+  .entry{
+    display:grid; grid-template-columns:150px 1fr; gap:18px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .entry:last-child{border-bottom:none;}
+  .entry .when{color:var(--muted); font-size:0.88rem; padding-top:2px;}
+  .entry .what strong{font-weight:500;}
+  @media (max-width:560px){
+    .entry{grid-template-columns:1fr; gap:4px;}
+  }
+
+  /* ---- Publications ---- */
+  .pub{padding:14px 0; border-bottom:1px solid var(--line);}
+  .pub:last-child{border-bottom:none;}
+  .pub .title{font-weight:500;}
+  .pub .meta{color:var(--muted); font-size:0.9rem; margin-top:3px;}
+
+  /* ---- Awards ---- */
+  .awards{list-style:none; margin:0; padding:0;}
+  .awards li{
+    padding:10px 0 10px 20px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .awards li:last-child{border-bottom:none;}
+  .awards li::before{
+    content:"";
+    position:absolute; left:0; top:18px;
+    width:7px; height:7px;
+    background:var(--brass);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0 60px;
+    color:var(--muted);
+    font-size:0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <img class="avatar" src="https://orbit.dtu.dk/files-asset/199435523/sara_shafiee_web_1_Copy.jpg" alt="Sara Shafiee">
+    <div class="hero-text">
+      <h1>Sara Shafiee</h1>
+      <div class="hero-role">Senior Researcher, <strong>DTU</strong> — Dept. of Civil and Mechanical Engineering<br>Engineering Design and Manufacturing Systems</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="links-row">
+      <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/">DTU Orbit</a>
+      <a href="https://scholar.google.com.au/citations?user=LjqT4OEAAAAJ&hl=en">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-9433-5060">ORCID</a>
+      <a href="https://www.scopus.com/authid/detail.uri?authorId=56492736800">Scopus</a>
+      <a href="https://www.researchgate.net/profile/Sara-Shafiee-2">ResearchGate</a>
+      <a href="https://www.linkedin.com/in/sarashafiee/">LinkedIn</a>
+      <a href="https://github.com/sara-shaf">GitHub</a>
+      <a href="mailto:sashaf@dtu.dk">sashaf@dtu.dk</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <p>Sara Shafiee's research lies at the intersection of <strong>artificial intelligence, complex engineering systems, and digital manufacturing</strong> — building computational models, machine learning methods, and simulation frameworks to support data-driven decision-making in product development and manufacturing.</p>
+    <p>She has led and contributed to funded interdisciplinary projects advancing the integration of AI and simulation in engineering design and production, with a growing focus on agent-based reasoning, explainable AI, and constraint-driven models for future engineering systems.</p>
+
+    <div class="highlights">
+      <div class="highlight-cell"><div class="num">95</div><div class="label">Publications</div></div>
+      <div class="highlight-cell"><div class="num">12</div><div class="label">Prizes &amp; distinctions</div></div>
+      <div class="highlight-cell"><div class="num">3</div><div class="label">Active / recent projects</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Current work</h2>
+    <div class="entry">
+      <div class="when">2024 – 2027</div>
+      <div class="what"><strong>RECODE</strong> — Independent Research Fund Denmark (DFF), Principal Investigator. Revolutionizing engineer-to-order companies through deep learning and advanced recommendation systems for optimal product design.</div>
+    </div>
+    <div class="entry">
+      <div class="when">2024 – 2027</div>
+      <div class="what"><strong>Advanced Recommendation Systems for Optimal Product Design</strong> — PhD supervision (Main Supervisor), with Hans Nørgaard Hansen and Murat Külahci.</div>
+    </div>
+    <div class="entry">
+      <div class="when">Ongoing</div>
+      <div class="what">Agentic and LLM-based systems for manufacturing evaluation, synthetic data generation, and explainable AI in engineering decision-making.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Selected publications</h2>
+    <div class="pub">
+      <div class="title">Agentic Data Analysis for Intelligent Manufacturing: Benchmark-Driven Evaluation of Agentic vs. Direct LLM Approaches</div>
+      <div class="meta">Moradzadeh Farid, N., Taghizadeh, A. &amp; Shafiee, S. — Procedia CIRP, 139, 2026 (in press)</div>
+    </div>
+    <div class="pub">
+      <div class="title">Evaluating Agentic AI Systems in Manufacturing: A Review of Taxonomy, Challenges and Future Directions</div>
+      <div class="meta">Farid, N. M. &amp; Shafiee, S. — IEEE, 2026</div>
+    </div>
+    <div class="pub">
+      <div class="title">How Consumer Attention Shapes Personalized Experiences in Generative AI Products: A Configurational Perspective</div>
+      <div class="meta">Ye, X., Wang, Y., Wang, C. L., Shafiee, S. &amp; Lee, S. H. — International Journal of Consumer Studies, 2026</div>
+    </div>
+    <div class="pub">
+      <div class="title">Synthetic Data Generation in Manufacturing: A Review of Ethical and Bias Challenges</div>
+      <div class="meta">Shafiee, S. &amp; Farid, N. M. — Proceedings of ICBAR '25, ACM, 2026</div>
+    </div>
+    <div class="pub">
+      <div class="title">Synthetic Data Generation in Manufacturing: A Review of Methods, Domains, and Emerging Trends</div>
+      <div class="meta">Shafiee, S. — Procedia CIRP, 139, 2026 (in press)</div>
+    </div>
+    <p class="muted" style="margin-top:14px; font-size:0.9rem;">Full list of 95 publications on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a>.</p>
+  </section>
+
+  <section>
+    <h2>Positions</h2>
+    <div class="entry"><div class="when">2021 – present</div><div class="what">Founder &amp; CEO, <strong>DivERS</strong></div></div>
+    <div class="entry"><div class="when">2022 – 2024</div><div class="what">External Lecturer, Copenhagen Business School</div></div>
+    <div class="entry"><div class="when">2022 – present</div><div class="what">CIRP member</div></div>
+    <div class="entry"><div class="when">2017 – 2019</div><div class="what">Senior Business Consultant, Haldor Topsøe A/S</div></div>
+    <div class="entry"><div class="when">2013 – 2017</div><div class="what">IT Project Manager, Haldor Topsøe A/S</div></div>
+    <div class="entry"><div class="when">2014 – 2017</div><div class="what">Industrial PhD, <strong>Conceptual Modelling for Product Configuration Systems</strong>, DTU</div></div>
+  </section>
+
+  <section>
+    <h2>Awards &amp; distinctions</h2>
+    <ul class="awards">
+      <li>Agnes &amp; Betzy Award (2025)</li>
+      <li>Alexander Foss MADE Award — Alexander Foss' Industrifond, DI (2017)</li>
+      <li>Innovation Fund Denmark Industrial Researcher Prize</li>
+      <li>Ambassador / Inno-Woman Role Model, Innovation Fund Denmark (2018)</li>
+      <li>Best Digital Startup, Venture Cup Denmark (2021, with A. Taghizadeh)</li>
+      <li>Best Paper Award, ConfWS 2020</li>
+      <li>Nordic Women in Tech Award (2022)</li>
+      <li>Multiple best paper awards at IEEE and ICED conferences</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Service</h2>
+    <p>Peer reviewer for <em>Automation in Construction</em>, <em>Construction Innovation</em>, and <em>Architectural Engineering and Design Management</em> (since 2020). External PhD examiner. Guest lecturer and conference presenter, most recently a keynote on agentic AI across the configuration lifecycle (Aug 2026).</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Sara Shafiee &nbsp;·&nbsp; DTU, Koppels Allé 404, 2800 Kgs. Lyngby, Denmark &nbsp;·&nbsp; <a href="mailto:sashaf@dtu.dk">sashaf@dtu.dk</a>
+</footer>
+
+</body>
+</html>
