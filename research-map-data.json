@@ -62,7 +62,8 @@
    ],
    "j": false,
    "code": "https://github.com/Nastaran95/manufacturing-agentic-evaluation",
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1109/AAIML67890.2026.11498174"
   },
   {
    "t": "How Consumer Attention Shapes Personalized Experiences in Generative AI Products: A Configurational Perspective",
@@ -76,7 +77,8 @@
     "S. Lee"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1111/ijcs.70199"
   },
   {
    "t": "Synthetic data generation in manufacturing: a review of methods, domains, and emerging trends",
@@ -97,7 +99,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1177/87569728241270600"
   },
   {
    "t": "Enhancing efficiency and sustainability in construction: a product configurator for customizable off-site building solutions",
@@ -111,7 +114,8 @@
     "E. Farr"
    ],
    "j": true,
-   "th": "aec"
+   "th": "aec",
+   "doi": "10.1080/17452007.2024.2434589"
   },
   {
    "t": "Generative AI in manufacturing: A literature review of recent applications and future prospects",
@@ -121,7 +125,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1016/j.procir.2025.01.001"
   },
   {
    "t": "Synthetic data generation in manufacturing: A review of ethical and bias challenges",
@@ -132,7 +137,8 @@
     "N. Farid"
    ],
    "j": false,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1145/3800227.3800303"
   },
   {
    "t": "Unsupervised Deep Learning for Rolling Bearing Anomaly Detection",
@@ -145,7 +151,8 @@
     "M. Kulahci"
    ],
    "j": false,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1145/3800227.3800273"
   },
   {
    "t": "An iterative consumer-centric and technology-driven product innovation strategy based on selective and dynamic consumer attention",
@@ -157,7 +164,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1016/j.techfore.2024.123713"
   },
   {
    "t": "Integration of product and manufacturing design: A systematic literature review",
@@ -167,7 +175,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1016/j.procir.2023.09.224"
   },
   {
    "t": "Streamlining customization and standardization: Improving configuration lifecycle management",
@@ -180,7 +189,8 @@
     "A. Ripoll"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.procir.2024.01.020"
   },
   {
    "t": "The impact of model-driven development on agile practices within knowledge-intensive systems engineering",
@@ -203,7 +213,8 @@
     "S. Ladikos"
    ],
    "j": true,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1016/j.procir.2024.01.007"
   },
   {
    "t": "Unveiling the latest trends and advancements in machine learning algorithms for recommender systems: a literature review",
@@ -213,7 +224,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1016/j.procir.2023.08.062"
   },
   {
    "t": "An empirical evaluation of scrum training’s suitability for the model-driven development of knowledge-intensive software systems",
@@ -226,7 +238,8 @@
     "S. Heng"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1016/j.datak.2023.102195"
   },
   {
    "t": "An empirical study on customers’ behavior of passive and active resistance to innovation",
@@ -239,7 +252,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1080/1331677X.2023.2179515"
   },
   {
    "t": "Customer-centric UI/UX design for sustainable software systems",
@@ -254,7 +268,8 @@
     "N. Mortensen"
    ],
    "j": false,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1007/978-3-031-34821-1_17"
   },
   {
    "t": "Framing business cases for the success of product configuration system projects",
@@ -269,7 +284,8 @@
     "L. Hvam"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.compind.2022.103839"
   },
   {
    "t": "Product configurator as a monitoring tool for environmental impact: An AEC perspective",
@@ -282,7 +298,8 @@
     "E. Farr"
    ],
    "j": false,
-   "th": "aec"
+   "th": "aec",
+   "doi": "10.1007/978-3-031-34821-1_12"
   },
   {
    "t": "Ranking products through online reviews considering the mass assignment of features based on BERT and q-rung orthopair fuzzy set theory",
@@ -294,7 +311,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1016/j.eswa.2022.119142"
   },
   {
    "t": "Shared leadership and employee-well-being: An investigation of whether and when in innovative project teams",
@@ -316,7 +334,8 @@
     "S. Shafiee"
    ],
    "j": false,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1007/978-3-031-34821-1_7"
   },
   {
    "t": "Application of Expert Systems for Personalizing Financial Decisions",
@@ -329,7 +348,8 @@
     "M. Nielsen"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1017/pds.2022.82"
   },
   {
    "t": "Developing separate or integrated configurators? A longitudinal case study",
@@ -340,7 +360,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.ijpe.2022.108517"
   },
   {
    "t": "Discovery of Product Features for Redesign from User Implicit Feedback",
@@ -353,7 +374,8 @@
     "S. Shafiee"
    ],
    "j": false,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1155/2022/7021431"
   },
   {
    "t": "Imperfect Reintegration in Temporary Organizing: Implications for Individuals and Organizations",
@@ -377,7 +399,8 @@
     "H. Hansen"
    ],
    "j": true,
-   "th": "ai"
+   "th": "ai",
+   "doi": "10.1016/j.procir.2022.05.098"
   },
   {
    "t": "Optimizing Joint Sustainable Supply Chain Decision-making under Emission Tax: A Stackelberg Game Model",
@@ -390,7 +413,8 @@
     "X. Cai"
    ],
    "j": false,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1109/IEEM55944.2022.9989876"
   },
   {
    "t": "A strategic approach to improve the development of use-oriented knowledge-based engineering configurators (KBEC)",
@@ -403,7 +427,8 @@
     "J. Franke"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1016/j.procir.2021.01.078"
   },
   {
    "t": "An online community-based dynamic customisation model: the trade-off between customer satisfaction and enterprise profit",
@@ -416,7 +441,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1080/00207543.2019.1693649"
   },
   {
    "t": "Application of design thinking to product-configuration projects",
@@ -429,7 +455,8 @@
     "L. Hvam"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1108/JMTM-04-2020-0137"
   },
   {
    "t": "Complexity Management in Engineer-To-Order Industry: A Design-Time Estimation Model for Engineering Processes",
@@ -441,7 +468,8 @@
     "L. Hvam"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1007/978-3-030-90700-6_72"
   },
   {
    "t": "Developing Integrated Configurators: A Longitudinal Case Study",
@@ -452,7 +480,8 @@
     "S. Shafiee"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM50564.2021.9672992"
   },
   {
    "t": "Discovery of associated consumer demands: Construction of a co-demanded product network with community detection",
@@ -465,7 +494,8 @@
     "D. Zhang"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1016/j.eswa.2021.115038"
   },
   {
    "t": "Evaluating the benefits of a computer-aided software engineering tool to develop and document product configuration systems",
@@ -480,7 +510,8 @@
     "L. Hvam"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1016/j.compind.2021.103432"
   },
   {
    "t": "Four independent knowledge domains to enable an agile, distributed development of user-centred engineering configurators",
@@ -494,7 +525,8 @@
     "J. Franke"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1016/j.procir.2021.10.021"
   },
   {
    "t": "Improving the Patient Visit Process in the Pre-treatment Phase",
@@ -505,7 +537,8 @@
     "S. Shafiee"
    ],
    "j": false,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1007/978-3-030-90700-6_111"
   },
   {
    "t": "Organization design in motion: Designing an organization for agility",
@@ -517,7 +550,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1017/pds.2021.496"
   },
   {
    "t": "The costs and benefits of multistage configuration: A framework and case study",
@@ -532,7 +566,8 @@
     "A. Myrodia"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.cie.2020.107095"
   },
   {
    "t": "A development approach towards user-centered front-ends for knowledge-based engineering configurators: a study within planning of robot-based automation solutions",
@@ -559,7 +594,8 @@
     "C. Li"
    ],
    "j": true,
-   "th": "rec"
+   "th": "rec",
+   "doi": "10.1155/2020/7190169"
   },
   {
    "t": "COMPARING THE PRODUCT CONFIGURATION BENEFITS IN ENGINEERING AND QUOTATION PHASES",
@@ -601,7 +637,8 @@
     "M. Korell"
    ],
    "j": true,
-   "th": "aec"
+   "th": "aec",
+   "doi": "10.1080/17452007.2020.1735291"
   },
   {
    "t": "Scrum training for product configuration systems development",
@@ -613,7 +650,8 @@
     "others"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.35199/NORDDESIGN2020.49"
   },
   {
    "t": "Scrum versus Rational Unified Process in facing the main challenges of product configuration systems development",
@@ -627,7 +665,8 @@
     "C. Forza"
    ],
    "j": true,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1016/j.jss.2020.110732"
   },
   {
    "t": "Comparing the gained benefits from product configuration systems based on maintenance efforts",
@@ -653,7 +692,8 @@
     "N. Mortensen"
    ],
    "j": false,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.3233/ATDE190105"
   },
   {
    "t": "Configuration platform for customisation of design, manufacturing and assembly processes of building faccade systems: A building information modelling perspective",
@@ -667,7 +707,8 @@
     "S. Shafiee"
    ],
    "j": true,
-   "th": "aec"
+   "th": "aec",
+   "doi": "10.1016/j.autcon.2019.102914"
   },
   {
    "t": "Development of a Design-Time Estimation Model for Complex Engineering Processes",
@@ -682,7 +723,8 @@
     "N. Mortensen"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.3233/ATDE190136"
   },
   {
    "t": "Prioritizing Products for Profitable Investments on Product Configuration Systems",
@@ -717,7 +759,8 @@
     "S. Heng"
    ],
    "j": false,
-   "th": "agile"
+   "th": "agile",
+   "doi": "10.1007/978-3-030-35333-9_31"
   },
   {
    "t": "The causes of product configuration project failure",
@@ -729,7 +772,8 @@
     "L. Hvam"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.compind.2019.03.002"
   },
   {
    "t": "The costs and benefits of product configuration projects in engineer-to-order companies",
@@ -741,7 +785,8 @@
     "L. Hvam"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.compind.2018.11.005"
   },
   {
    "t": "The impact of applying product-modelling techniques in configurator projects",
@@ -755,7 +800,8 @@
     "Z. Herbert-Hansen"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1080/00207543.2018.1436783"
   },
   {
    "t": "A database administration tool to model the configuration projects",
@@ -770,7 +816,8 @@
     "L. Hvam"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM.2018.8607654"
   },
   {
    "t": "Behavior-driven development in product configuration systems",
@@ -796,7 +843,8 @@
     "L. Hvam"
    ],
    "j": false,
-   "th": "org"
+   "th": "org",
+   "doi": "10.1109/IEEM.2018.8607762"
   },
   {
    "t": "Cost benefit analysis in product configuration systems",
@@ -836,7 +884,8 @@
     "C. Forza"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1108/JKM-01-2017-0017"
   },
   {
    "t": "Management Challenges in Product Configuration Projects",
@@ -899,7 +948,8 @@
     "A. Myrodia"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.compind.2018.04.003"
   },
   {
    "t": "The main challenges for manufacturing companies in implementing and utilizing configurators",
@@ -913,7 +963,8 @@
     "N. Mortensen"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.compind.2018.05.001"
   },
   {
    "t": "Automatic Identification of Similarities Across Products to Improve the Configuration Process in ETO Companies",
@@ -985,7 +1036,8 @@
     "K. Kristjansdottir"
    ],
    "j": true,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1016/j.aei.2017.02.004"
   },
   {
    "t": "Usage Frequency of Product Configuration Systems Relative to Integrations and Fields of Application",
@@ -999,7 +1051,8 @@
     "E. Sandrin"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM.2017.8289882"
   },
   {
    "t": "Analysis of Product Modelling Techniques for Product Configuration Systems in Industrial Companies",
@@ -1037,7 +1090,8 @@
     "L. Hvam"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM.2016.7798190"
   },
   {
    "t": "Impact of the utilization of a product configuration system on product’s life cycle complexity",
@@ -1126,7 +1180,8 @@
     "K. Kristjansdottir"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/WI-IAT.2015.40"
   },
   {
    "t": "An agile documentation system for highly engineered, complex product configuration systems",
@@ -1152,7 +1207,22 @@
     "A. Myrodia"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM.2016.7797985"
+  },
+  {
+   "t": "Antibacterial performance of nano polypropylene ﬁlter media containing nano-TiO2 and clay particles",
+   "y": 2015,
+   "v": "Journal of Nanoparticle Research",
+   "a": [
+    "S. Shafiee",
+    "M. Zarrebini",
+    "E. Naghashzargar",
+    "D. Semnani"
+   ],
+   "j": true,
+   "th": "pcs",
+   "doi": "10.1007/s11051-015-3195-y"
   },
   {
    "t": "Goal-Oriented Data Collection Framework in Configuration Projects",
@@ -1201,7 +1271,8 @@
     "L. Hvam"
    ],
    "j": false,
-   "th": "pcs"
+   "th": "pcs",
+   "doi": "10.1109/IEEM.2015.7385953"
   },
   {
    "t": "How to scope a product configuration project in an engineering company",
