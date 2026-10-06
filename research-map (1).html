@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research map · Sara Shafiee</title>
+<meta name="description" content="An interactive map of Sara Shafiee's research at DTU: from product configuration to agentic AI for manufacturing.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+:root{--bg:#0f1226;--bg2:#151a3a;--ink:#e6e8f2;--muted:#9aa3bf;--line:#2a2f52;--sky:#7dd3fc;--lav:#c4b5fd;--gold:#fbbf24}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--sky);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{padding:40px 0 8px}
+.back{font-size:14px;color:var(--muted)}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(32px,5vw,52px);line-height:1.1;margin:18px 0 10px;letter-spacing:-.01em}
+.lede{max-width:62ch;color:#c9cde0;font-size:18px;margin:0}
+.facts{color:var(--muted);font-size:15px;margin:14px 0 0}
+#mapbox{position:relative;margin:26px 0 0;border:1px solid var(--line);border-radius:18px;background:radial-gradient(ellipse at 50% 45%,#1b2150 0%,#0f1226 70%);overflow:hidden}
+#map{display:block;width:100%;height:auto}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 16px;border-top:1px solid var(--line);background:rgba(15,18,38,.7)}
+button.play{background:var(--gold);color:#1b1640;border:0;border-radius:999px;padding:8px 16px;font:600 14px Inter,sans-serif;cursor:pointer}
+button.play:hover{filter:brightness(1.08)}
+#yearlabel{font-family:"Source Serif 4",serif;font-size:22px;min-width:60px}
+input[type=range]{flex:1;min-width:160px;accent-color:var(--gold)}
+.hint{color:var(--muted);font-size:13px;width:100%}
+#tip{position:absolute;pointer-events:none;background:#0b0e22;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;max-width:320px;opacity:0;transition:opacity .12s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#tip b{display:block;font-weight:600;margin-bottom:3px;line-height:1.35}
+#tip span{color:var(--muted)}
+section{padding:46px 0 0}
+h2{font-family:"Source Serif 4",serif;font-weight:600;font-size:28px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 18px;max-width:64ch}
+#evo{width:100%;height:auto;display:block}
+.themes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 14px Inter,sans-serif;cursor:pointer}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.chip[aria-pressed=true]{border-color:var(--ink);background:#232a5c}
+.chip .n{color:var(--muted);font-weight:400}
+.search{width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:10px 12px;font:15px Inter,sans-serif;margin-bottom:18px}
+ol.pubs{list-style:none;margin:0;padding:0}
+.pubs li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.pubs li.hl{background:linear-gradient(90deg,rgba(251,191,36,.12),transparent);border-radius:8px}
+.yr{font-family:"Source Serif 4",serif;font-size:20px;color:var(--muted);padding-left:4px}
+.pt{font-weight:500;line-height:1.4;margin:0 0 3px}
+.pm{color:var(--muted);font-size:14px;margin:0}
+.pm .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.links{font-size:14px;margin-top:4px;display:flex;gap:14px}
+.empty{color:var(--muted);padding:20px 0}
+footer{padding:56px 0 48px;color:var(--muted);font-size:14px}
+footer p{max-width:64ch}
+@media (max-width:640px){.pubs li{grid-template-columns:48px 1fr}.yr{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<a class="back" href="https://sara-shaf.github.io/">Sara Shafiee</a>
+<h1>Twelve years of research, one map</h1>
+<p class="lede">Every dot is a publication. They gather around the themes I work on, from product configuration in engineer-to-order companies to agentic AI for manufacturing. Press play to watch the work grow, or hover a dot to see the paper.</p>
+<p class="facts" id="facts"></p>
+</header>
+
+<div id="mapbox">
+<svg id="map" viewBox="0 40 1100 640" role="img" aria-label="Network map of publications grouped by research theme"></svg>
+<div id="tip" role="status"></div>
+<div class="controls">
+<button class="play" id="play">Watch it grow</button>
+<span id="yearlabel">2026</span>
+<input type="range" id="year" min="2014" max="2026" value="2026" aria-label="Show publications up to year">
+<p class="hint">Click a theme to filter the list below. Click a dot to jump to the paper.</p>
+</div>
+</div>
+
+<section>
+<h2>How the research evolved</h2>
+<p class="sub">Publications per year, coloured by theme. Product configuration laid the foundation; since 2020 the work has moved steadily towards data-driven methods and AI.</p>
+<svg id="evo" viewBox="0 0 1100 300" role="img" aria-label="Stacked bar chart of publications per year by theme"></svg>
+</section>
+
+<section id="list">
+<h2>All publications</h2>
+<p class="sub">Filter by theme or search by title, venue or co-author.</p>
+<div class="themes" id="chips"></div>
+<input class="search" id="q" type="search" placeholder="Search titles, venues, co-authors" aria-label="Search publications">
+<ol class="pubs" id="pubs"></ol>
+</section>
+
+<footer>
+<p>Themes were assigned from paper titles and may simplify work that spans several areas. New publications are added automatically every week from ORCID. Full and current list on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a>, <a href="https://scholar.google.com/citations?user=LjqT4OEAAAAJ&hl=en">Google Scholar</a> and <a href="https://www.scopus.com/authid/detail.uri?authorId=56492736800">Scopus</a>.</p>
+<p><a href="https://sara-shaf.github.io/">Website</a> &nbsp; <a href="https://github.com/sara-shaf">GitHub</a> &nbsp; <a href="https://github.com/Sara-Shafiee-lab">Sara Shafiee Lab</a></p>
+</footer>
+</div>
+
+<script>
+const FALLBACK={"themes": [{"k": "ai", "n": "AI, agents & digital manufacturing"}, {"k": "rec", "n": "Data-driven product innovation & recommender systems"}, {"k": "aec", "n": "Construction & modular design"}, {"k": "agile", "n": "Agile & model-driven engineering of configurators"}, {"k": "org", "n": "Organisation, leadership & digital transformation"}, {"k": "pcs", "n": "Product configuration & mass customization"}], "pubs": [{"t": "Scoping a product configuration project for engineer-to-order companies", "y": 2014, "v": "International Journal of Industrial Engineering and Management", "a": ["S. Shafiee", "L. Hvam", "M. Bonev"], "j": true, "th": "pcs"}, {"t": "How to scope a product configuration project in an engineering company", "y": 2014, "v": "6th International Conference on Mass Customization and Personalization in Central Europe", "a": ["S. Shafiee", "L. Hvam", "M. Bonev"], "j": false, "th": "pcs"}, {"t": "An agile documentation system for highly engineered, complex product configuration systems", "y": 2015, "v": "22nd EurOMA Conference", "a": ["S. Shafiee", "L. Hvam", "K. Kristjansdottir"], "j": false, "th": "agile"}, {"t": "How to Analyze and Quantify Similarities between Configured Engineer-To-Order Products by Comparing the Highlighted Features Utilizing the Configuration System Abilities", "y": 2015, "v": "17th International Configuration Workshop", "a": ["S. Shafiee", "L. Hvam", "K. Kristjansdottir"], "j": false, "th": "pcs"}, {"t": "Goal-Oriented Data Collection Framework in Configuration Projects", "y": 2015, "v": "The 2015 World Conference on Mass Customization, Personalization, and Co-Creation (MCPC 2015)", "a": ["S. Shafiee", "L. Hvam", "K. Kristjansdottir"], "j": false, "th": "pcs"}, {"t": "Identification of Profitable Areas to Apply Product Configuration Systems in Engineering-To-Order Companies", "y": 2015, "v": "The 2015 World Conference on Mass Customization, Personalization, and Co-Creation (MCPC 2015)", "a": ["K. Kristjansdottir", "L. Hvam", "S. Shafiee", "M. Bonev"], "j": false, "th": "pcs"}, {"t": "Alignment of Configuration and Documentation for Highly Engineered Complex Product Configuration Systems: a Demonstration from a Case Study", "y": 2015, "v": "IEEE/WIC/ACM Web Intelligence Conference 2015 IEEE/WIC/ACM. Intelligent Agent Technology Conference 2015", "a": ["S. Shafiee", "K. Kristjansdottir"], "j": false, "th": "pcs"}, {"t": "Utilizing Product Configuration Systems for Supporting the Critical Parts of the Engineering Processes", "y": 2015, "v": "IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "QUANTIFICATION OF BENEFITS AND COST FROM APPLYING A PRODUCT CONFIGURATION SYSTEM", "y": 2016, "v": "7th International Conference on Mass Customization and Personalization in Central Europe (MCP - CE 2016)", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam", "A. Myrodia"], "j": false, "th": "pcs"}, {"t": "BUSINESS CASES FOR PRODUCT CONFIGURATION SYSTEMS", "y": 2016, "v": "7th International Conference on Mass Customization and Personalization in Central Europe (MCP - CE 2016)", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Improved Performance and Quality of Configurators by Receiving Real-Time Information from Suppliers", "y": 2016, "v": "Configuration Workshop, At Toulouse, France", "a": ["K. Kristjansdottir", "S. Shafiee", "M. Bonev", "L. Hvam", "M. Bennick", "C. Andersen"], "j": false, "th": "pcs"}, {"t": "Industrial experience from using the cpm-procedure for developing, implementing and maintaining product configuration systems", "y": 2016, "v": "18th International Conference on Industrial Engineering", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Analysis of Visual Representation Techniques for Product Configuration Systems in Industrial Companies", "y": 2015, "v": "Industrial Engineering and Engineering Management (IEEM), 2016 IEEE International Conference on", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam", "A. Felfernig", "A. Myrodia"], "j": false, "th": "pcs"}, {"t": "Development and implementation strategy for the of product configuration systems in engineer-to-order companies", "y": 2016, "v": "2016 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Product configuration system and its impact on product's life cycle complexity", "y": 2016, "v": "2016 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["A. Myrodia", "K. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Impact of the utilization of a product configuration system on product’s life cycle complexity", "y": 2016, "v": "5th World conference on Production and operations Management", "a": ["A. Myrodia", "K. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Industrial Application of Configurators: From Motivations to Realized Benefits", "y": 2016, "v": "18th International Conference on Industrial Engineering", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "The documentation of product configuration systems: A framework and an IT solution", "y": 2017, "v": "Advanced Engineering Informatics", "a": ["S. Shafiee", "L. Hvam", "A. Haug", "M. Dam", "K. Kristjansdottir"], "j": true, "th": "pcs"}, {"t": "Complexity of Configurators Relative to Integrations and Field of Application", "y": 2017, "v": "19th International Configuration Workshop", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Battistello", "L. Hvam", "C. Forza"], "j": false, "th": "pcs"}, {"t": "Usage Frequency of Product Configuration Systems Relative to Integrations and Fields of Application", "y": 2017, "v": "", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam", "L. Battistello", "E. Sandrin"], "j": false, "th": "pcs"}, {"t": "How to Identify Possible Applications of Product Configuration Systems in Engineer-to-Order Companies", "y": 2017, "v": "International Journal of Industrial Engineering and Management (IJIEM)", "a": ["k. Kristjansdottir", "S. Shafiee", "L. Hvam"], "j": true, "th": "pcs"}, {"t": "Conceptual Modelling for Product Configuration Systems", "y": 2017, "v": "", "a": ["S. Shafiee"], "j": false, "th": "pcs"}, {"t": "Make your own product in the Customerpedia", "y": 2017, "v": "", "a": ["S. Shafiee"], "j": false, "th": "pcs"}, {"t": "The impact of applying product-modelling techniques in configurator projects", "y": 2019, "v": "International Journal of Production Research", "a": ["L. Hvam", "K. Kristjansdottir", "S. Shafiee", "N. Mortensen", "Z. Herbert-Hansen"], "j": true, "th": "pcs"}, {"t": "How to scope configuration projects and manage the knowledge they require", "y": 2018, "v": "Journal of Knowledge Management", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam", "C. Forza"], "j": true, "th": "pcs"}, {"t": "Analysis of Product Modelling Techniques for Product Configuration Systems in Industrial Companies", "y": 2016, "v": "2016 International Conference on Industrial Engineering and Engineering Management: IEEM 2016", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam", "A. Felfernig", "A. Myrodia"], "j": false, "th": "pcs"}, {"t": "The main challenges for manufacturing companies in implementing and utilizing configurators", "y": 2018, "v": "Computers in Industry", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam", "C. Forza", "N. Mortensen"], "j": true, "th": "pcs"}, {"t": "Return on investment from the use of product configuration systems--A case study", "y": 2018, "v": "Computers in Industry", "a": ["K. Kristjansdottir", "S. Shafiee", "L. Hvam", "M. Bonev", "A. Myrodia"], "j": true, "th": "pcs"}, {"t": "Automatic Identification of Similarities Across Products to Improve the Configuration Process in ETO Companies", "y": 2017, "v": "International Journal of Industrial Engineering and Management", "a": ["S. Shafiee", "K. Kristjansdottir", "L. Hvam"], "j": true, "th": "pcs"}, {"t": "Design Thinking in Product Configuration Projects", "y": 2018, "v": "2nd European International Conference on Industrial Engineering and Operations Management", "a": ["S. Shafiee", "S. Nahrkhalaji", "L. Hvam", "N. Mortensen"], "j": false, "th": "agile"}, {"t": "Management Challenges in Product Configuration Projects", "y": 2018, "v": "2nd European International Conference on Industrial Engineering and Operations Management", "a": ["S. Shafiee", "Y. Wautelet", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Product modularization in the architecture, engineering and construction (aec) industry", "y": 2018, "v": "Proceedings of 2nd European International Conference on Industrial Engineering and Operations Management (IEOM)", "a": ["S. Shafiee", "P. Piroozfar", "L. Hvam"], "j": false, "th": "aec"}, {"t": "Product modularization: Case studies from construction industries", "y": 2018, "v": "8th International Conference on Mass Customization and Personalization", "a": ["S. Shafiee", "P. Piroozfar", "L. Hvam"], "j": false, "th": "aec"}, {"t": "Merging commercial and technical configurators", "y": 2018, "v": "8th International Conference on Mass Customization and Personalization", "a": ["S. Shafiee", "C. Forza", "A. Haug", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Cost benefit analysis in product configuration systems", "y": 2018, "v": "Configuration Workshop 2018", "a": ["S. Shafiee", "A. Felfernig", "L. Hvam", "P. Piroozfar", "C. Forza"], "j": false, "th": "pcs"}, {"t": "Behavior-driven development in product configuration systems", "y": 2018, "v": "Proceedings of the 20th Configuration Workshop", "a": ["S. Shafiee", "L. Hvam", "A. Haug", "Y. Wautelet"], "j": false, "th": "agile"}, {"t": "A database administration tool to model the configuration projects", "y": 2018, "v": "2018 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["S. Shafiee", "S. Friis", "L. Lis", "U. Harlou", "Y. Wautelet", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Challenges of digital transformation: The case of the non-profit sector", "y": 2018, "v": "2018 IEEE international conference on industrial engineering and engineering management (IEEM)", "a": ["S. Nahrkhalaji", "S. Shafiee", "M. Shafiee", "L. Hvam"], "j": false, "th": "org"}, {"t": "The costs and benefits of product configuration projects in engineer-to-order companies", "y": 2019, "v": "Computers in Industry", "a": ["A. Haug", "S. Shafiee", "L. Hvam"], "j": true, "th": "pcs"}, {"t": "The causes of product configuration project failure", "y": 2019, "v": "Computers in Industry", "a": ["A. Haug", "S. Shafiee", "L. Hvam"], "j": true, "th": "pcs"}, {"t": "Configuration platform for customisation of design, manufacturing and assembly processes of building faccade systems: A building information modelling perspective", "y": 2019, "v": "Automation in construction", "a": ["P. Piroozfar", "E. Farr", "L. Hvam", "D. Robinson", "S. Shafiee"], "j": true, "th": "aec"}, {"t": "Revisiting the product configuration systems development procedure for scrum compliance: An i* driven process fragment", "y": 2019, "v": "International Conference on Product-Focused Software Process Improvement", "a": ["Y. Wautelet", "S. Shafiee", "S. Heng"], "j": false, "th": "agile"}, {"t": "Prioritizing Products for Profitable Investments on Product Configuration Systems", "y": 2019, "v": "Workshop on Configuration 2019 (ConfWS’19)", "a": ["S. Shafiee", "L. Hvam", "P. Piroozfar"], "j": false, "th": "pcs"}, {"t": "Comparing the gained benefits from product configuration systems based on maintenance efforts", "y": 2019, "v": "Workshop on Configuration 2019 (ConfWS’19)", "a": ["S. Shafiee", "L. Hvam", "A. Haug"], "j": false, "th": "pcs"}, {"t": "Rethinking organization design to enforce organizational agility", "y": 2019, "v": "11th Symposium on Competence-Based Strategic Management (SKM 2019)", "a": ["S. Kristensen", "S. Shafiee"], "j": false, "th": "org"}, {"t": "Development of a Design-Time Estimation Model for Complex Engineering Processes", "y": 2019, "v": "Transdisciplinary Engineering for Complex Socio-technical Systems: Proceedings of the 26th ISTE International Conference on Transdisciplinary Engineering, July 30--August 1, 2019", "a": ["S. Shafiee", "Z. Herbert-Hansen", "L. Hvam", "A. Haug", "M. Bonev", "N. Mortensen"], "j": false, "th": "pcs"}, {"t": "Complementing the scoping process of configuration projects by design thinking", "y": 2019, "v": "26th ISTE International Conference on Transdisciplinary Engineering", "a": ["S. Shafiee", "A. Haug", "S. Kristensen", "L. Hvam", "N. Mortensen"], "j": false, "th": "agile"}, {"t": "An online community-based dynamic customisation model: the trade-off between customer satisfaction and enterprise profit", "y": 2021, "v": "International Journal of Production Research", "a": ["Y. Wang", "J. Wu", "L. Lin", "S. Shafiee"], "j": true, "th": "rec"}, {"t": "A “User-Knowledge-Product” Co-Creation Cyberspace Model for Product Innovation", "y": 2020, "v": "Complexity", "a": ["Y. Wang", "J. Wu", "R. Zhang", "S. Shafiee", "C. Li"], "j": true, "th": "rec"}, {"t": "Modularisation strategies in the AEC industry: a comparative analysis", "y": 2020, "v": "Architectural Engineering and Design Management", "a": ["S. Shafiee", "P. Piroozfar", "L. Hvam", "E. Farr", "G. Huang", "W. Pan", "A. Kudsk", "J. Rasmussen", "M. Korell"], "j": true, "th": "aec"}, {"t": "Scrum training for product configuration systems development", "y": 2020, "v": "DS 101: Proceedings of NordDesign 2020, Lyngby, Denmark, 12th-14th August 2020", "a": ["S. Shafiee", "Y. Wautelet", "others"], "j": true, "th": "agile"}, {"t": "Scrum versus Rational Unified Process in facing the main challenges of product configuration systems development", "y": 2020, "v": "Journal of Systems and Software", "a": ["S. Shafiee", "Y. Wautelet", "L. Hvam", "E. Sandrin", "C. Forza"], "j": true, "th": "agile"}, {"t": "Application of design thinking to product-configuration projects", "y": 2021, "v": "Journal of Manufacturing Technology Management", "a": ["S. Shafiee", "A. Haug", "S. Shafiee Kristensen", "L. Hvam"], "j": true, "th": "agile"}, {"t": "A development approach towards user-centered front-ends for knowledge-based engineering configurators: a study within planning of robot-based automation solutions", "y": 2020, "v": "22nd International Configuration Workshop (CONFWS'20)", "a": ["S. Eike", "S. Sara", "F. Tobias", "F. J\"org"], "j": false, "th": "agile"}, {"t": "Complexity of Configurators Relative to Types of Outputs", "y": 2020, "v": "", "a": ["S. Shafiee", "E. Sch\"affer", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "COMPARING THE PRODUCT CONFIGURATION BENEFITS IN ENGINEERING AND QUOTATION PHASES", "y": 2020, "v": "Conference on Mass Customizaon and Personalizaon -- Community of Europe (MCP - CE 2020)", "a": ["S. Shafiee", "M. Savi'c", "Z. Anivsi'c"], "j": false, "th": "pcs"}, {"t": "The costs and benefits of multistage configuration: A framework and case study", "y": 2021, "v": "Computers & Industrial Engineering", "a": ["J. Rasmussen", "A. Haug", "S. Shafiee", "L. Hvam", "N. Mortensen", "A. Myrodia"], "j": true, "th": "pcs"}, {"t": "A strategic approach to improve the development of use-oriented knowledge-based engineering configurators (KBEC)", "y": 2021, "v": "Procedia CIRP", "a": ["E. Sch\"affer", "S. Shafiee", "A. Mayr", "J. Franke"], "j": true, "th": "agile"}, {"t": "Evaluating the benefits of a computer-aided software engineering tool to develop and document product configuration systems", "y": 2021, "v": "Computers in Industry", "a": ["S. Shafiee", "Y. Wautelet", "S. Friis", "L. Lis", "U. Harlou", "L. Hvam"], "j": true, "th": "agile"}, {"t": "Discovery of associated consumer demands: Construction of a co-demanded product network with community detection", "y": 2021, "v": "Expert Systems with Applications", "a": ["J. Wu", "Y. Wang", "S. Shafiee", "D. Zhang"], "j": true, "th": "rec"}, {"t": "Organization design in motion: Designing an organization for agility", "y": 2021, "v": "Proceedings of the Design Society", "a": ["S. Kristensen", "M. Shafiee", "S. Shafiee"], "j": true, "th": "org"}, {"t": "Four independent knowledge domains to enable an agile, distributed development of user-centred engineering configurators", "y": 2021, "v": "Procedia CIRP", "a": ["E. Sch\"affer", "A. Mayr", "T. Reichenstein", "S. Shafiee", "J. Franke"], "j": true, "th": "agile"}, {"t": "Complexity Management in Engineer-To-Order Industry: A Design-Time Estimation Model for Engineering Processes", "y": 2021, "v": "Proceedings of the Changeable, Agile, Reconfigurable and Virtual Production Conference and the World Mass Customization & Personalization Conference", "a": ["C. Brabrand", "S. Shafiee", "L. Hvam"], "j": false, "th": "pcs"}, {"t": "Improving the Patient Visit Process in the Pre-treatment Phase", "y": 2021, "v": "Proceedings of the Changeable, Agile, Reconfigurable and Virtual Production Conference and the World Mass Customization & Personalization Conference", "a": ["S. Kristensen", "S. Shafiee"], "j": false, "th": "org"}, {"t": "Developing Integrated Configurators: A Longitudinal Case Study", "y": 2021, "v": "2021 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["L. Zhang", "S. Shafiee"], "j": false, "th": "pcs"}, {"t": "Developing separate or integrated configurators? A longitudinal case study", "y": 2022, "v": "International Journal of Production Economics", "a": ["L. Zhang", "S. Shafiee"], "j": true, "th": "pcs"}, {"t": "Application of Expert Systems for Personalizing Financial Decisions", "y": 2022, "v": "Proceedings of the Design Society", "a": ["S. Shafiee", "K. Rasmussen", "E. Sch\"affer", "M. Nielsen"], "j": true, "th": "rec"}, {"t": "Integrating product configuration systems with manufacturing system reconfiguration", "y": 2022, "v": "Procedia CIRP", "a": ["S. Shafiee", "L. Zhang", "N. Mortensen", "H. Hansen"], "j": true, "th": "ai"}, {"t": "Imperfect Reintegration in Temporary Organizing: Implications for Individuals and Organizations", "y": 2022, "v": "38th EGOS Colloquium 2022", "a": ["S. Kristensen", "S. Shafiee"], "j": false, "th": "org"}, {"t": "Discovery of Product Features for Redesign from User Implicit Feedback", "y": 2022, "v": "", "a": ["X. Wang", "Y. Wang", "J. Wu", "S. Shafiee"], "j": false, "th": "rec"}, {"t": "Ranking products through online reviews considering the mass assignment of features based on BERT and q-rung orthopair fuzzy set theory", "y": 2023, "v": "Expert Systems with Applications", "a": ["S. Yin", "Y. Wang", "S. Shafiee"], "j": true, "th": "rec"}, {"t": "Framing business cases for the success of product configuration system projects", "y": 2023, "v": "Computers in Industry", "a": ["S. Shafiee", "E. Sandrin", "C. Forza", "K. Kristjansdottir", "A. Haug", "L. Hvam"], "j": true, "th": "pcs"}, {"t": "Optimizing Joint Sustainable Supply Chain Decision-making under Emission Tax: A Stackelberg Game Model", "y": 2022, "v": "2022 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)", "a": ["L. Zhang", "S. Ma", "S. Shafiee", "X. Cai"], "j": false, "th": "org"}, {"t": "An empirical study on customers’ behavior of passive and active resistance to innovation", "y": 2023, "v": "Economic research-Ekonomska istravzivanja", "a": ["Y. Wang", "M. Han", "Y. Wang", "S. Shafiee"], "j": true, "th": "org"}, {"t": "An empirical evaluation of scrum training’s suitability for the model-driven development of knowledge-intensive software systems", "y": 2023, "v": "Data & Knowledge Engineering", "a": ["S. Shafiee", "Y. Wautelet", "S. Poelmans", "S. Heng"], "j": true, "th": "agile"}, {"t": "Shared leadership and employee-well-being: An investigation of whether and when in innovative project teams", "y": 2023, "v": "6th Interdisciplinary Perspectives on Leadership Symposium", "a": ["S. Kristensen", "S. Shafiee"], "j": false, "th": "org"}, {"t": "The Mass Customization Projects Enactment in Practice: Traditional Versus Agile Project Management", "y": 2023, "v": "Proceedings of the Changeable, Agile, Reconfigurable and Virtual Production Conference and the World Mass Customization & Personalization Conference", "a": ["N. Suzic", "S. Shafiee"], "j": false, "th": "agile"}, {"t": "Customer-centric UI/UX design for sustainable software systems", "y": 2023, "v": "Proceedings of the Changeable, Agile, Reconfigurable and Virtual Production Conference and the World Mass Customization & Personalization Conference", "a": ["S. Shafiee", "S. Kristensen", "A. Taghizadeh", "N. Suzic", "L. Zhang", "N. Mortensen"], "j": false, "th": "agile"}, {"t": "Product configurator as a monitoring tool for environmental impact: An AEC perspective", "y": 2023, "v": "Proceedings of the Changeable, Agile, Reconfigurable and Virtual Production Conference and the World Mass Customization & Personalization Conference", "a": ["P. Piroozfar", "S. Shafiee", "L. Forberg", "E. Farr"], "j": false, "th": "aec"}, {"t": "Integration of product and manufacturing design: A systematic literature review", "y": 2024, "v": "Procedia CIRP", "a": ["S. Shafiee"], "j": true, "th": "ai"}, {"t": "Unveiling the latest trends and advancements in machine learning algorithms for recommender systems: a literature review", "y": 2024, "v": "Procedia CIRP", "a": ["S. Shafiee"], "j": true, "th": "rec"}, {"t": "Unleashing manufacturing potential: a simulation-based journey towards optimal efficiency", "y": 2024, "v": "Procedia CIRP", "a": ["S. Shafiee", "S. Ladikos"], "j": true, "th": "ai"}, {"t": "Streamlining customization and standardization: Improving configuration lifecycle management", "y": 2024, "v": "Procedia CIRP", "a": ["S. Shafiee", "M. Bejlegaard", "R. Rey", "A. Ripoll"], "j": true, "th": "pcs"}, {"t": "The impact of model-driven development on agile practices within knowledge-intensive systems engineering", "y": 2024, "v": "3rd International Workshop on Agile Methods for Information Systems Engineering", "a": ["G. Aghakhani", "K. Tsilionis", "S. Shafiee"], "j": false, "th": "agile"}, {"t": "Diversity and team learning in intraorganizational project teams: The mediating role of shared leadership", "y": 2025, "v": "Project Management Journal", "a": ["S. Kristensen", "S. Shafiee"], "j": true, "th": "org"}, {"t": "An iterative consumer-centric and technology-driven product innovation strategy based on selective and dynamic consumer attention", "y": 2024, "v": "Technological Forecasting and Social Change", "a": ["X. Ye", "Y. Wang", "S. Shafiee"], "j": true, "th": "rec"}, {"t": "Enhancing efficiency and sustainability in construction: a product configurator for customizable off-site building solutions", "y": 2025, "v": "Architectural Engineering and Design Management", "a": ["S. Shafiee", "P. Piroozfar", "L. Forberg", "H. Hansen", "E. Farr"], "j": true, "th": "aec"}, {"t": "Generative AI in manufacturing: A literature review of recent applications and future prospects", "y": 2025, "v": "Procedia CIRP", "a": ["S. Shafiee"], "j": true, "th": "ai"}, {"t": "Agentic Data Analysis for Intelligent Manufacturing: Benchmark-Driven Evaluation of Agentic vs. Direct LLM Approaches", "y": 2026, "v": "Procedia CIRP", "a": ["N. Farid", "A. Taghizadeh", "S. Shafiee"], "j": true, "code": "https://github.com/Nastaran95/agentic-man-da", "th": "ai"}, {"t": "Synthetic data generation in manufacturing: a review of methods, domains, and emerging trends", "y": 2026, "v": "Procedia CIRP", "a": ["S. Shafiee"], "j": true, "th": "ai"}, {"t": "How Consumer Attention Shapes Personalized Experiences in Generative AI Products: A Configurational Perspective", "y": 2026, "v": "International Journal of Consumer Studies", "a": ["X. Ye", "Y. Wang", "C. Wang", "S. Shafiee", "S. Lee"], "j": true, "th": "rec"}, {"t": "Unsupervised Deep Learning for Rolling Bearing Anomaly Detection", "y": 2025, "v": "Proceedings of the 2025 5th International Conference on Big Data, Artificial Intelligence and Risk Management", "a": ["S. Shafiee", "N. Farid", "A. Taghizadeh", "M. Kulahci"], "j": false, "th": "ai"}, {"t": "Synthetic data generation in manufacturing: A review of ethical and bias challenges", "y": 2025, "v": "Proceedings of the 2025 5th International Conference on Big Data, Artificial Intelligence and Risk Management", "a": ["S. Shafiee", "N. Farid"], "j": false, "th": "ai"}, {"t": "Evaluating Agentic AI Systems in Manufacturing: A Review of Taxonomy, Challenges and Future Directions", "y": 2026, "v": "2026 International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML)", "a": ["N. Farid", "S. Shafiee"], "j": false, "code": "https://github.com/Nastaran95/manufacturing-agentic-evaluation", "th": "ai"}, {"t": "CPJudgeBench: Meta-Evaluation of LLM Judges for Constraint Programming through Solution-Space Semantics", "y": 2026, "v": "EMNLP 2026 (Main)", "a": ["N. Moradzadeh Farid", "S. Shafiee", "et al."], "j": false, "code": "https://github.com/Nastaran95/CPJudgeBench", "th": "ai"}]};
+fetch('research-map-data.json',{cache:'no-store'}).then(r=>r.ok?r.json():FALLBACK).catch(()=>FALLBACK).then(init);
+function init(DATA){
+const COL={pcs:"#7dd3fc",agile:"#a78bfa",aec:"#34d399",rec:"#f472b6",org:"#94a3b8",ai:"#fbbf24"};
+const TH=DATA.themes, P=DATA.pubs.map((p,i)=>({...p,id:i}));
+const TN=Object.fromEntries(TH.map(t=>[t.k,t.n]));
+const yrs=d3.extent(P,p=>p.y);
+document.getElementById('facts').textContent=`${P.length} publications, ${P.filter(p=>p.j).length} of them in journals, ${yrs[0]}–${yrs[1]}`;
+let active=null, maxYear=yrs[1];
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- constellation ----------
+const W=1100,H=640,svg=d3.select('#map');
+const hubPos={pcs:[330,320],agile:[560,170],aec:[170,520],org:[890,530],rec:[840,200],ai:[700,420]};
+const hubs=TH.map(t=>({hub:true,k:t.k,n:t.n,fx:hubPos[t.k][0],fy:hubPos[t.k][1]}));
+const nodes=[...hubs,...P.map(p=>({...p,x:hubPos[p.th][0]+(Math.random()-.5)*60,y:hubPos[p.th][1]+(Math.random()-.5)*60}))];
+const r=p=>p.j?7:4.5;
+const links=nodes.filter(n=>!n.hub).map(n=>({source:hubs.find(h=>h.k===n.th),target:n}));
+const gL=svg.append('g'), gN=svg.append('g'), gH=svg.append('g'), gT=svg.append('g');
+const ln=gL.selectAll('line').data(links).join('line').attr('stroke',d=>COL[d.target.th]).attr('stroke-opacity',.16).attr('stroke-width',1);
+const dots=gN.selectAll('circle').data(nodes.filter(n=>!n.hub)).join('circle')
+ .attr('r',r).attr('fill',d=>COL[d.th]).attr('fill-opacity',.9).attr('stroke','#0f1226').attr('stroke-width',1.2)
+ .attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.y}: ${d.t}`).style('cursor','pointer');
+const hubG=gH.selectAll('g').data(hubs).join('g').attr('transform',d=>`translate(${d.fx},${d.fy})`).style('cursor','pointer')
+ .attr('tabindex',0).attr('role','button').attr('aria-label',d=>`Filter by ${d.n}`);
+hubG.append('circle').attr('r',30).attr('fill',d=>COL[d.k]).attr('fill-opacity',.14).attr('stroke',d=>COL[d.k]).attr('stroke-opacity',.6);
+hubG.append('circle').attr('r',9).attr('fill',d=>COL[d.k]);
+hubG.each(function(d){
+  const g=d3.select(this), words=d.n.split(' '); const lines=[];let cur='';
+  words.forEach(w=>{ if((cur+' '+w).trim().length>22){lines.push(cur.trim());cur=w}else cur+=' '+w}); lines.push(cur.trim());
+  const t=gT.append('text').datum(d).attr('class','lbl').attr('text-anchor','middle').attr('y',48).attr('fill','#e6e8f2').attr('font-size',15).attr('font-weight',600).attr('font-family','Inter,sans-serif').style('paint-order','stroke').attr('stroke','#0f1226').attr('stroke-width',4);
+  lines.forEach((l,i)=>t.append('tspan').attr('x',0).attr('dy',i?18:0).text(l));
+});
+const sim=d3.forceSimulation(nodes)
+ .force('x',d3.forceX(d=>d.hub?d.fx:hubPos[d.th][0]).strength(.07))
+ .force('y',d3.forceY(d=>d.hub?d.fy:hubPos[d.th][1]).strength(.07))
+ .force('collide',d3.forceCollide(d=>d.hub?44:r(d)+2.2))
+ .on('tick',()=>{dots.attr('cx',d=>d.x).attr('cy',d=>d.y);placeLabels();ln.attr('x1',d=>d.source.fx).attr('y1',d=>d.source.fy).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y)});
+if(reduce){sim.stop();for(let i=0;i<300;i++)sim.tick();dots.attr('cx',d=>d.x).attr('cy',d=>d.y);ln.attr('x2',d=>d.target.x).attr('y2',d=>d.target.y).attr('x1',d=>d.source.fx).attr('y1',d=>d.source.fy);placeLabels()}
+
+function placeLabels(){
+ gT.selectAll('text.lbl').attr('transform',d=>{const ys=P.length?nodes.filter(n=>!n.hub&&n.th===d.k&&n.y!==undefined).map(n=>n.y):[];
+   const bottom=ys.length?Math.max(d.fy+30,d3.max(ys)+8):d.fy+30; return `translate(${d.fx},${bottom-48+22})`});
+}
+placeLabels();
+const tip=document.getElementById('tip'), box=document.getElementById('mapbox');
+function showTip(e,d){tip.innerHTML=`<b>${d.t}</b><span>${d.y} · ${d.v||''}</span>`;tip.style.opacity=1;
+ const b=box.getBoundingClientRect(); let x=e.clientX-b.left+14, y=e.clientY-b.top+14; if(x>b.width-330)x-=340; tip.style.left=x+'px'; tip.style.top=y+'px'}
+dots.on('mousemove',showTip).on('mouseleave',()=>tip.style.opacity=0)
+ .on('focus',function(e,d){const bb=this.getBoundingClientRect();showTip({clientX:bb.right,clientY:bb.bottom},d)}).on('blur',()=>tip.style.opacity=0)
+ .on('click',(e,d)=>jump(d.id)).on('keydown',(e,d)=>{if(e.key==='Enter')jump(d.id)});
+hubG.on('click',(e,d)=>setActive(active===d.k?null:d.k)).on('keydown',(e,d)=>{if(e.key==='Enter')setActive(active===d.k?null:d.k)});
+
+function applyVisibility(){
+ dots.transition().duration(reduce?0:250).attr('r',d=>d.y<=maxYear?r(d):0).attr('fill-opacity',d=>(!active||d.th===active)?.92:.15);
+ ln.attr('stroke-opacity',d=>d.target.y<=maxYear&&(!active||d.target.th===active)?.18:0);
+ hubG.attr('opacity',d=>!active||d.k===active?1:.35);gT.selectAll('text.lbl').attr('opacity',d=>!active||d.k===active?1:.35);
+}
+// ---------- year control ----------
+const yr=document.getElementById('year'), yl=document.getElementById('yearlabel'), play=document.getElementById('play');
+yr.addEventListener('input',()=>{maxYear=+yr.value;yl.textContent=maxYear;applyVisibility()});
+let timer=null;
+play.addEventListener('click',()=>{
+ if(timer){clearInterval(timer);timer=null;play.textContent='Watch it grow';return}
+ maxYear=yrs[0];yr.value=maxYear;yl.textContent=maxYear;applyVisibility();play.textContent='Pause';
+ timer=setInterval(()=>{ if(maxYear>=yrs[1]){clearInterval(timer);timer=null;play.textContent='Watch it grow';return}
+   maxYear++;yr.value=maxYear;yl.textContent=maxYear;applyVisibility()}, reduce?200:750);
+});
+
+// ---------- evolution chart ----------
+(function(){
+ const es=d3.select('#evo'), m={t:16,r:12,b:34,l:34}, w=1100-m.l-m.r, h=300-m.t-m.b;
+ const years=d3.range(yrs[0],yrs[1]+1), keys=['pcs','agile','aec','org','rec','ai'];
+ const rows=years.map(y=>{const o={y};keys.forEach(k=>o[k]=P.filter(p=>p.y===y&&p.th===k).length);return o});
+ const st=d3.stack().keys(keys)(rows);
+ const x=d3.scaleBand().domain(years).range([0,w]).padding(.28), y=d3.scaleLinear().domain([0,d3.max(rows,r=>keys.reduce((s,k)=>s+r[k],0))]).nice().range([h,0]);
+ const g=es.append('g').attr('transform',`translate(${m.l},${m.t})`);
+ g.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1',0).attr('x2',w).attr('y1',y).attr('y2',y).attr('stroke','#2a2f52');
+ g.append('g').selectAll('text').data(y.ticks(4)).join('text').attr('x',-8).attr('y',y).attr('dy','.32em').attr('text-anchor','end').attr('fill','#9aa3bf').attr('font-size',12).text(d=>d);
+ g.selectAll('g.s').data(st).join('g').attr('fill',d=>COL[d.key]).selectAll('rect').data(d=>d.map(v=>({...v,k:d.key}))).join('rect')
+  .attr('x',d=>x(d.data.y)).attr('width',x.bandwidth()).attr('y',d=>y(d[1])).attr('height',d=>Math.max(0,y(d[0])-y(d[1]))).attr('rx',2)
+  .append('title').text(d=>`${d.data.y}: ${d[1]-d[0]} in ${TN[d.k]}`);
+ g.append('g').selectAll('text').data(years).join('text').attr('x',d=>x(d)+x.bandwidth()/2).attr('y',h+22).attr('text-anchor','middle').attr('fill','#9aa3bf').attr('font-size',12).text(d=>d);
+})();
+
+// ---------- list ----------
+const chips=document.getElementById('chips'), list=document.getElementById('pubs'), q=document.getElementById('q');
+const allChip=`<button class="chip" data-k="" aria-pressed="true">All <span class="n">${P.length}</span></button>`;
+chips.innerHTML=allChip+TH.map(t=>`<button class="chip" data-k="${t.k}" aria-pressed="false"><i style="background:${COL[t.k]}"></i>${t.n} <span class="n">${P.filter(p=>p.th===t.k).length}</span></button>`).join('');
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip'); if(b) setActive(b.dataset.k||null)});
+q.addEventListener('input',renderList);
+function setActive(k){active=k;chips.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String((c.dataset.k||null)===k)));applyVisibility();renderList()}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderList(){
+ const s=q.value.trim().toLowerCase();
+ const items=P.filter(p=>(!active||p.th===active)&&(!s||(p.t+' '+p.v+' '+p.a.join(' ')).toLowerCase().includes(s))).sort((a,b)=>b.y-a.y);
+ list.innerHTML=items.length?items.map(p=>{
+  const au=p.a.length>5?p.a.slice(0,5).join(', ')+' et al.':p.a.join(', ');
+  return `<li id="p${p.id}"><div class="yr">${p.y}</div><div><p class="pt">${esc(p.t)}</p><p class="pm"><span class="dot" style="background:${COL[p.th]}"></span>${esc(p.v||'')}${p.v?'. ':''}${esc(au)}</p><div class="links"><a href="${p.doi?'https://doi.org/'+p.doi:'https://scholar.google.com/scholar?q='+encodeURIComponent(p.t)}" target="_blank" rel="noopener">${p.doi?'Read paper':'Find paper'}</a>${p.code?`<a href="${p.code}" target="_blank" rel="noopener">Code</a>`:''}</div></div></li>`}).join('')
+  :`<li class="empty">No publications match "${esc(q.value)}". Try a shorter search or choose All.</li>`;
+}
+function jump(id){ if(active&&P[id].th!==active)setActive(null); q.value&&(q.value='',renderList());
+ const el=document.getElementById('p'+id); if(!el)return; document.querySelectorAll('.pubs li.hl').forEach(x=>x.classList.remove('hl'));
+ el.classList.add('hl'); el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); }
+applyVisibility(); renderList();
+}
+</script>
+</body>
+</html>
