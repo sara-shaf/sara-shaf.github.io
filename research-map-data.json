@@ -23,6 +23,10 @@
   {
    "k": "pcs",
    "n": "Product configuration & mass customization"
+  },
+  {
+   "k": "other",
+   "n": "Collaborations beyond engineering"
   }
  ],
  "pubs": [
@@ -403,6 +407,19 @@
    "doi": "10.1016/j.procir.2022.05.098"
   },
   {
+   "t": "Investigate earnings management at the sensitive earnings amounts’ threshold of companies with high financial leverage",
+   "y": 2022,
+   "v": "Management Accounting",
+   "a": [
+    "S. Shafiee",
+    "H. Kordlouie",
+    "S. Shahverdiani",
+    "M. Ghasemi"
+   ],
+   "j": true,
+   "th": "other"
+  },
+  {
    "t": "Optimizing Joint Sustainable Supply Chain Decision-making under Emission Tax: A Stackelberg Game Model",
    "y": 2022,
    "v": "2022 IEEE International Conference on Industrial Engineering and Engineering Management (IEEM)",
@@ -415,6 +432,20 @@
    "j": false,
    "th": "org",
    "doi": "10.1109/IEEM55944.2022.9989876"
+  },
+  {
+   "t": "The Examination of Real Earnings Management on the Threshold of Sensitive Earnings Amounts",
+   "y": 2022,
+   "v": "Journal of Management Accounting and Auditing Knowledge",
+   "a": [
+    "S. Shafiee",
+    "F. Rahnamay Roodposhti",
+    "H. Kordlouie",
+    "S. Shahverdiani",
+    "M. Ghasemi"
+   ],
+   "j": true,
+   "th": "other"
   },
   {
    "t": "A strategic approach to improve the development of use-oriented knowledge-based engineering configurators (KBEC)",
@@ -952,6 +983,17 @@
    "doi": "10.1016/j.compind.2018.04.003"
   },
   {
+   "t": "Teachers' Evaluation of the ILI High Intermediate Book Series through an Eclectic Checklist",
+   "y": 2018,
+   "v": "Theory and Practice in Language Studies",
+   "a": [
+    "S. Shafiee",
+    "F. Behjat"
+   ],
+   "j": true,
+   "th": "other"
+  },
+  {
    "t": "The main challenges for manufacturing companies in implementing and utilizing configurators",
    "y": 2018,
    "v": "Computers in Industry",
@@ -1221,7 +1263,7 @@
     "D. Semnani"
    ],
    "j": true,
-   "th": "pcs",
+   "th": "other",
    "doi": "10.1007/s11051-015-3195-y"
   },
   {

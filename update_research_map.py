@@ -22,6 +22,7 @@ THEME_RULES = [
     ("aec",   r"\baec\b|construction|modulari|building|off-site|facade|fa\u00e7ade"),
     ("agile", r"scrum|agile|design thinking|model-driven|behavio[u]?r-driven|rational unified|computer-aided software|user-cent|use-oriented|knowledge domains|ui/ux|traditional versus"),
     ("org",   r"digital transformation|organi[sz]ation|leadership|team learning|reintegration|patient|resistance to innovation|supply chain|well-being"),
+    ("other", r"antibacterial|nanoparticle|nano-|earnings|teachers|language teaching|textbook"),
     ("pcs",   r"."),
 ]
 
