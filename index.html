@@ -16,8 +16,8 @@
 {"@context":"https://schema.org","@type":"Person","name":"Sara Shafiee","jobTitle":"Senior Researcher / Associate Professor","affiliation":{"@type":"Organization","name":"Technical University of Denmark (DTU)"},"url":"https://sara-shaf.github.io/","image":"https://orbit.dtu.dk/files-asset/199435523/sara_shafiee_web_1_Copy.jpg","sameAs":["https://orbit.dtu.dk/en/persons/sara-shafiee/","https://orcid.org/0000-0001-9433-5060","https://scholar.google.com/citations?user=LjqT4OEAAAAJ","https://www.scopus.com/authid/detail.uri?authorId=56492736800","https://www.linkedin.com/in/sarashafiee/","https://github.com/sara-shaf"]}
 </script>
 <style>
-:root{--bg:#ffffff;--ink:#1f2328;--muted:#5d6670;--line:#e3e6ea;--accent:#990000;--soft:#f6f7f9}
-@media (prefers-color-scheme:dark){:root{--bg:#14171c;--ink:#e6e8eb;--muted:#9aa3ad;--line:#2b3038;--accent:#ff8a80;--soft:#1b1f26}}
+:root{--bg:#ffffff;--ink:#1f2328;--muted:#5d6670;--line:#e3e6ea;--accent:#990000;--soft:#f6f7f9;--hero:linear-gradient(120deg,#fff1f1 0%,#f4f0ff 50%,#eaf6ff 100%);--c1:#990000;--c2:#7c3aed;--c3:#0284c7;--c4:#059669;--c5:#d97706;--c6:#db2777;--c7:#ea580c}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--ink:#e6e8eb;--muted:#9aa3ad;--line:#2b3038;--accent:#ff8a80;--soft:#1b1f26;--hero:linear-gradient(120deg,#2a1719 0%,#211b33 50%,#14243a 100%);--c1:#ff8a80;--c2:#b69cff;--c3:#5cc2f2;--c4:#4fd1a5;--c5:#f5b94d;--c6:#f48cc0;--c7:#fb9a5b}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -27,8 +27,9 @@ header.nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1p
 .nav .in{max-width:860px;margin:0 auto;padding:12px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .nav .name{font-weight:600;color:var(--ink);margin-right:auto}
 .nav a.l{color:var(--muted);font-size:15px}
-main{max-width:860px;margin:0 auto;padding:0 24px 64px}
-.profile{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;padding:44px 0 28px}
+main{max-width:860px;margin:0 auto;padding:12px 24px 64px}
+main>section:first-child{border-top:0}
+.profile{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center}
 .profile img{width:150px;height:150px;border-radius:50%;object-fit:cover;background:var(--soft)}
 h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:34px;line-height:1.15;margin:0 0 6px}
 .role{margin:0;color:var(--ink)}
@@ -62,6 +63,38 @@ ul.pubs,ul.plain{list-style:none;margin:0;padding:0}
 .gh{display:inline-block;margin-top:14px;padding:8px 14px;border:1px solid var(--accent);border-radius:6px;font-size:14.5px;font-weight:500}
 .gh:hover{background:var(--accent);color:#fff;text-decoration:none}
 .nav a.ghn{color:var(--accent);font-weight:500}
+
+.hero{background:var(--hero);border-bottom:1px solid var(--line)}
+.hero .profile{max-width:860px;margin:0 auto;padding:44px 24px 34px}
+.profile img{box-shadow:0 0 0 4px var(--bg),0 0 0 7px var(--c2)}
+.links a{display:inline-flex;align-items:center;padding:3px 11px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:14px}
+.links a:hover{text-decoration:none;border-color:currentColor}
+.links a::before{content:"";width:8px;height:8px;border-radius:50%;margin-right:7px;background:var(--dot)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:-22px auto 0;padding:0 24px;position:relative}
+.stat{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--k);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:26px;line-height:1.1;color:var(--k)}
+.stat span{font-size:13.5px;color:var(--muted)}
+h2::after{content:"";display:block;width:36px;height:3px;border-radius:2px;margin-top:6px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3))}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.theme{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-start;padding:14px 16px;border-radius:10px;border:1px solid var(--line);border-left:4px solid var(--k);background:color-mix(in srgb,var(--k) 6%,var(--bg))}
+.theme:hover{background:color-mix(in srgb,var(--k) 12%,var(--bg))}
+.theme:focus-visible{outline:2px solid var(--k);outline-offset:2px}
+.theme h3{color:var(--k);margin-bottom:4px}
+.theme p{margin:0;font-size:14.5px;color:var(--muted)}
+.theme .n{font-size:13px;color:var(--k);font-weight:600;margin-top:6px;display:block}
+.chips button{border-color:color-mix(in srgb,var(--k,var(--c1)) 45%,var(--line));color:var(--k,var(--muted))}
+.chips button.on{background:var(--k,var(--accent));border-color:var(--k,var(--accent));color:#fff}
+.pubs li{border-left:3px solid var(--k,transparent);padding-left:12px;border-bottom:1px solid var(--line)}
+.yr{color:var(--ink)}
+.when{font-weight:600;color:var(--c2)}
+#awards .when{color:var(--c5)}#press .when{color:var(--c6)}#experience .when{color:var(--c3)}#activities .when{color:var(--c4)}
+.proj{border-left:4px solid var(--c3);padding-left:14px;margin-bottom:10px;border-bottom:0;background:color-mix(in srgb,var(--c3) 5%,var(--bg));border-radius:0 8px 8px 0}
+.proj:first-of-type{border-left-color:var(--c1);background:color-mix(in srgb,var(--c1) 5%,var(--bg))}
+.proj:last-of-type{border-left-color:var(--c4);background:color-mix(in srgb,var(--c4) 5%,var(--bg))}
+.note{border-left-color:var(--c2);background:color-mix(in srgb,var(--c2) 7%,var(--bg))}
+.gh{border-color:var(--c2);color:var(--c2);background:var(--bg)}
+.gh:hover{background:var(--c2);color:#fff}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
 footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 @media (max-width:600px){.profile{grid-template-columns:1fr;text-align:left}.profile img{width:120px;height:120px}h1{font-size:28px}.when{display:block;min-width:0}}
 </style>
@@ -70,6 +103,7 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <header class="nav"><div class="in">
 <a class="name" href="#about">Sara Shafiee</a>
 <a class="l" href="#about">About</a>
+<a class="l" href="#research">Research</a>
 <a class="l" href="#publications">Publications</a>
 <a class="l" href="#projects">Projects</a>
 <a class="l" href="#group">Group</a>
@@ -78,7 +112,7 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <a class="l ghn" href="https://github.com/sara-shaf">GitHub ↗</a>
 </div></header>
 
-<main>
+<div class="hero">
 <div class="profile" id="about">
 <img src="https://orbit.dtu.dk/files-asset/199435523/sara_shafiee_web_1_Copy.jpg" alt="Sara Shafiee">
 <div>
@@ -86,22 +120,42 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <p class="role">Senior Researcher / Associate Professor</p>
 <p class="aff">Department of Civil and Mechanical Engineering · Engineering Design and Manufacturing Systems<br>Technical University of Denmark (DTU)</p>
 <div class="links">
-<a href="https://orbit.dtu.dk/en/persons/sara-shafiee/">DTU Orbit</a>
-<a href="https://scholar.google.com/citations?user=LjqT4OEAAAAJ&amp;hl=en">Google Scholar</a>
-<a href="https://orcid.org/0000-0001-9433-5060">ORCID</a>
-<a href="https://www.scopus.com/authid/detail.uri?authorId=56492736800">Scopus</a>
-<a href="https://github.com/sara-shaf">GitHub</a>
-<a href="https://www.linkedin.com/in/sarashafiee/">LinkedIn</a>
+<a href="https://orbit.dtu.dk/en/persons/sara-shafiee/" style="--dot:var(--c1)">DTU Orbit</a>
+<a href="https://scholar.google.com/citations?user=LjqT4OEAAAAJ&amp;hl=en" style="--dot:var(--c3)">Google Scholar</a>
+<a href="https://orcid.org/0000-0001-9433-5060" style="--dot:var(--c4)">ORCID</a>
+<a href="https://www.scopus.com/authid/detail.uri?authorId=56492736800" style="--dot:var(--c7)">Scopus</a>
+<a href="https://github.com/sara-shaf" style="--dot:var(--c2)">GitHub</a>
+<a href="https://www.linkedin.com/in/sarashafiee/" style="--dot:var(--c3)">LinkedIn</a>
 </div>
 <a class="gh" href="https://github.com/sara-shaf">Research code, lab and interactive research map on GitHub →</a>
 </div>
 </div>
 
+</div>
+<div class="stats">
+<div class="stat" style="--k:var(--c1)"><b id="st-pubs">99</b><span>publications</span></div>
+<div class="stat" style="--k:var(--c5)"><b>12</b><span>prizes and awards</span></div>
+<div class="stat" style="--k:var(--c3)"><b>DFF</b><span>PI of RECODE, 2024–2027</span></div>
+<div class="stat" style="--k:var(--c4)"><b>10+</b><span>years in industry and academia</span></div>
+</div>
+<main>
 <section>
 <h2>About</h2>
 <p>Sara Shafiee builds AI that helps engineers design smarter. As Senior Researcher / Associate Professor at DTU's Department of Civil and Mechanical Engineering, she works where artificial intelligence meets complex engineering systems and digital manufacturing, turning decades of engineering knowledge into faster, better decisions.</p>
 <p>As Principal Investigator, she leads externally funded research on agentic and multi-agent AI, recommendation systems for product design and configuration, explainable and constraint-driven models, LLM-based evaluation, and synthetic data for industrial applications, including projects funded by the Independent Research Fund Denmark. Her group, the <a href="https://github.com/Sara-Shafiee-lab">Sara Shafiee Lab</a>, combines fundamental research with close industry collaboration.</p>
 <p>Her work has been recognised with the Agnes &amp; Betzy Award, the Nordic Women in Tech Award, the Alexander Foss MADE Award, Innovation Fund Denmark's Industrial Researcher Prize, and best paper awards at IEEE and ICED. She is a member of CIRP, the International Academy for Production Engineering, and of the Young Academy of Technology, Science and Innovation (YATSI). Before academia she worked as an IT Project Manager and Senior Business Consultant at Topsoe, and she later founded and led DivERS as its CEO.</p>
+</section>
+
+<section id="research">
+<h2>Research themes</h2>
+<div class="themes">
+<button class="theme" data-k="ai" style="--k:var(--c2)"><h3>AI agents &amp; digital manufacturing</h3><p>Agentic and multi-agent AI, LLM judges and evaluation, synthetic data.</p><span class="n" data-n="ai"></span></button>
+<button class="theme" data-k="rec" style="--k:var(--c3)"><h3>Recommender systems</h3><p>Data-driven product innovation and recommendations for optimal product design.</p><span class="n" data-n="rec"></span></button>
+<button class="theme" data-k="pcs" style="--k:var(--c1)"><h3>Product configuration</h3><p>Configurators, mass customization and engineer-to-order companies.</p><span class="n" data-n="pcs"></span></button>
+<button class="theme" data-k="agile" style="--k:var(--c4)"><h3>Agile &amp; model-driven engineering</h3><p>Scrum, documentation and modelling for configurator projects.</p><span class="n" data-n="agile"></span></button>
+<button class="theme" data-k="aec" style="--k:var(--c5)"><h3>Construction &amp; modular design</h3><p>Configurators and digital tools for building and off-site construction.</p><span class="n" data-n="aec"></span></button>
+<button class="theme" data-k="org" style="--k:var(--c6)"><h3>Organisation &amp; leadership</h3><p>Digital transformation, diversity and team learning.</p><span class="n" data-n="org"></span></button>
+</div>
 </section>
 
 <section id="publications">
@@ -191,6 +245,8 @@ Technical University of Denmark, Koppels Allé, Building 404, Room 232, 2800 Kgs
 const FALLBACK={themes:[],pubs:[]};
 const SRC="https://raw.githubusercontent.com/sara-shaf/sara-shaf/main/research-map-data.json";
 let D=FALLBACK, theme="all";
+const COL={ai:"--c2",rec:"--c3",pcs:"--c1",agile:"--c4",aec:"--c5",org:"--c6",other:"--c7"};
+const kv=k=>COL[k]?' style="--k:var('+COL[k]+')"':"";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function link(p){return p.doi?"https://doi.org/"+p.doi:"https://scholar.google.com/scholar?q="+encodeURIComponent('"'+p.t+'"')}
 function render(){
@@ -199,19 +255,20 @@ function render(){
   let html="",y=null;
   for(const p of list){
     if(p.y!==y){if(y!==null)html+="</ul>";y=p.y;html+='<div class="yr">'+y+'</div><ul class="pubs">';}
-    html+='<li><div class="t"><a href="'+link(p)+'">'+esc(p.t)+'</a>'+(p.j?'<span class="tag">Journal</span>':'')+'</div><div class="m">'+esc((p.a||[]).join(", "))+(p.v?" · "+esc(p.v):"")+(p.code?' · <a href="'+esc(p.code)+'">code</a>':"")+'</div></li>';
+    html+='<li'+kv(p.th)+'><div class="t"><a href="'+link(p)+'">'+esc(p.t)+'</a>'+(p.j?'<span class="tag">Journal</span>':'')+'</div><div class="m">'+esc((p.a||[]).join(", "))+(p.v?" · "+esc(p.v):"")+(p.code?' · <a href="'+esc(p.code)+'">code</a>':"")+'</div></li>';
   }
   if(y!==null)html+="</ul>";
   document.getElementById("publist").innerHTML=html||'<p class="sub">No matches.</p>';
-  if(D.pubs.length)document.getElementById("pubcount").textContent=D.pubs.length;
+  if(D.pubs.length){document.getElementById("pubcount").textContent=D.pubs.length;document.getElementById("st-pubs").textContent=D.pubs.length;document.querySelectorAll("[data-n]").forEach(e=>{const c=D.pubs.filter(p=>p.th===e.dataset.n).length;e.textContent=c+" papers →";});}
 }
 function chips(){
   const n=k=>D.pubs.filter(p=>k==="all"||p.th===k).length;
   const all=[{k:"all",n:"All"}].concat(D.themes);
-  document.getElementById("chips").innerHTML=all.filter(t=>n(t.k)).map(t=>'<button data-k="'+t.k+'" class="'+(t.k===theme?"on":"")+'">'+esc(t.n)+" ("+n(t.k)+")</button>").join("");
+  document.getElementById("chips").innerHTML=all.filter(t=>n(t.k)).map(t=>'<button data-k="'+t.k+'"'+kv(t.k)+' class="'+(t.k===theme?"on":"")+'">'+esc(t.n)+" ("+n(t.k)+")</button>").join("");
 }
 document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;theme=b.dataset.k;chips();render();});
 document.getElementById("q").addEventListener("input",render);
+document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{theme=b.dataset.k;chips();render();document.getElementById("publications").scrollIntoView();}));
 const FAIL='<p class="sub">Could not load the list right now. See all publications on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a>.</p>';
 fetch(SRC,{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.pubs&&d.pubs.length){D=d;chips();render();}else document.getElementById("publist").innerHTML=FAIL}).catch(()=>{document.getElementById("publist").innerHTML=FAIL});
 </script>
