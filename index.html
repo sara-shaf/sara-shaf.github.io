@@ -76,6 +76,8 @@ ul.pubs,ul.plain{list-style:none;margin:0;padding:0}
 .links a::before{content:"";width:8px;height:8px;border-radius:50%;margin-right:7px;background:var(--dot)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:-22px auto 0;padding:0 24px;position:relative}
 .stat{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--k);border-radius:10px;padding:12px 14px}
+a.stat{color:inherit;text-decoration:none;transition:transform .15s,box-shadow .15s}
+a.stat:hover{transform:translateY(-2px);box-shadow:0 6px 18px color-mix(in srgb,var(--k) 22%,transparent)}
 .stat b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:26px;line-height:1.1;color:var(--k)}
 .stat span{font-size:13.5px;color:var(--muted)}
 h2::after{content:"";display:block;width:36px;height:3px;border-radius:2px;margin-top:6px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3))}
@@ -140,10 +142,10 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 
 </div>
 <div class="stats">
-<div class="stat" style="--k:var(--c1)"><b id="st-pubs">99</b><span>publications</span></div>
-<div class="stat" style="--k:var(--c5)"><b>12</b><span>prizes and awards</span></div>
-<div class="stat" style="--k:var(--c3)"><b>DFF</b><span>PI of RECODE, 2024–2027</span></div>
-<div class="stat" style="--k:var(--c4)"><b>10+</b><span>years in industry and academia</span></div>
+<a class="stat" href="#publications" style="--k:var(--c1)"><b id="st-pubs">99</b><span>publications</span></a>
+<a class="stat" href="#awards" style="--k:var(--c5)"><b>12</b><span>prizes and awards</span></a>
+<a class="stat" href="#projects" style="--k:var(--c3)"><b>DFF</b><span>PI of RECODE, 2024–2027</span></a>
+<a class="stat" href="#experience" style="--k:var(--c4)"><b>10+</b><span>years in industry and academia</span></a>
 </div>
 <main>
 <section id="about">
