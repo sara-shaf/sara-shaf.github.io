@@ -24,9 +24,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 header.nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav .in{max-width:860px;margin:0 auto;padding:12px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.nav .name{font-weight:600;color:var(--ink);margin-right:auto}
-.nav a.l{color:var(--muted);font-size:15px}
+.nav .in{max-width:1000px;margin:0 auto;padding:0 24px;display:flex;gap:4px;align-items:center;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+.nav .in::-webkit-scrollbar{display:none}
+.nav .name{font-weight:600;color:var(--ink);margin-right:auto;padding:14px 12px 14px 0}
+.nav a.l{color:var(--muted);font-size:15px;padding:14px 8px;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav a.l:hover{color:var(--ink);text-decoration:none}
+.nav a.l.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
 main{max-width:860px;margin:0 auto;padding:12px 24px 64px}
 main>section:first-child{border-top:0}
 .profile{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center}
@@ -35,7 +38,7 @@ h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:34px;lin
 .role{margin:0;color:var(--ink)}
 .aff{margin:2px 0 12px;color:var(--muted);font-size:15px}
 .links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:15px}
-section{padding:28px 0 6px;border-top:1px solid var(--line);scroll-margin-top:64px}
+section{padding:28px 0 6px;border-top:1px solid var(--line);scroll-margin-top:70px}
 h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:24px;margin:0 0 14px}
 h3{font-size:16px;font-weight:600;margin:0}
 p{margin:0 0 14px;max-width:72ch}
@@ -65,6 +68,7 @@ ul.pubs,ul.plain{list-style:none;margin:0;padding:0}
 .nav a.ghn{color:var(--accent);font-weight:500}
 
 .hero{background:var(--hero);border-bottom:1px solid var(--line)}
+#top{scroll-margin-top:70px}
 .hero .profile{max-width:860px;margin:0 auto;padding:44px 24px 34px}
 .profile img{box-shadow:0 0 0 4px var(--bg),0 0 0 7px var(--c2)}
 .links a{display:inline-flex;align-items:center;padding:3px 11px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:14px}
@@ -101,19 +105,22 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 </head>
 <body>
 <header class="nav"><div class="in">
-<a class="name" href="#about">Sara Shafiee</a>
+<a class="name" href="#top">Sara Shafiee</a>
 <a class="l" href="#about">About</a>
 <a class="l" href="#research">Research</a>
 <a class="l" href="#publications">Publications</a>
 <a class="l" href="#projects">Projects</a>
 <a class="l" href="#group">Group</a>
+<a class="l" href="#experience">Experience</a>
 <a class="l" href="#awards">Awards</a>
+<a class="l" href="#activities">Talks</a>
+<a class="l" href="#press">Press</a>
 <a class="l" href="#contact">Contact</a>
 <a class="l ghn" href="https://github.com/sara-shaf">GitHub ↗</a>
 </div></header>
 
 <div class="hero">
-<div class="profile" id="about">
+<div class="profile" id="top">
 <img src="https://orbit.dtu.dk/files-asset/199435523/sara_shafiee_web_1_Copy.jpg" alt="Sara Shafiee">
 <div>
 <h1>Sara Shafiee</h1>
@@ -139,7 +146,7 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <div class="stat" style="--k:var(--c4)"><b>10+</b><span>years in industry and academia</span></div>
 </div>
 <main>
-<section>
+<section id="about">
 <h2>About</h2>
 <p>Sara Shafiee builds AI that helps engineers design smarter. As Senior Researcher / Associate Professor at DTU's Department of Civil and Mechanical Engineering, she works where artificial intelligence meets complex engineering systems and digital manufacturing, turning decades of engineering knowledge into faster, better decisions.</p>
 <p>As Principal Investigator, she leads externally funded research on agentic and multi-agent AI, recommendation systems for product design and configuration, explainable and constraint-driven models, LLM-based evaluation, and synthetic data for industrial applications, including projects funded by the Independent Research Fund Denmark. Her group, the <a href="https://github.com/Sara-Shafiee-lab">Sara Shafiee Lab</a>, combines fundamental research with close industry collaboration.</p>
@@ -271,6 +278,25 @@ document.getElementById("q").addEventListener("input",render);
 document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{theme=b.dataset.k;chips();render();document.getElementById("publications").scrollIntoView();}));
 const FAIL='<p class="sub">Could not load the list right now. See all publications on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a>.</p>';
 fetch(SRC,{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.pubs&&d.pubs.length){D=d;chips();render();}else document.getElementById("publist").innerHTML=FAIL}).catch(()=>{document.getElementById("publist").innerHTML=FAIL});
+
+(function(){
+  const links=[...document.querySelectorAll('.nav a.l[href^="#"]')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const secs=[...map.keys()].map(id=>document.getElementById(id)).filter(Boolean);
+  function setActive(id){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));const a=map.get(id);if(a&&a.scrollIntoView&&a.parentElement.scrollWidth>a.parentElement.clientWidth){a.parentElement.scrollTo({left:a.offsetLeft-60,behavior:'smooth'});}}
+  let lock=0;
+  function onScroll(){
+    if(Date.now()<lock)return;
+    const y=window.scrollY+90;let cur=null;
+    for(const s of secs){if(s.getBoundingClientRect().top+window.scrollY<=y)cur=s.id;}
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)cur=secs[secs.length-1].id;
+    if(cur!==onScroll.last){onScroll.last=cur;setActive(cur);}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  links.forEach(a=>a.addEventListener('click',()=>{lock=Date.now()+1200;onScroll.last=a.getAttribute('href').slice(1);setActive(onScroll.last);}));
+  ['wheel','touchstart','keydown'].forEach(ev=>window.addEventListener(ev,()=>{lock=0;},{passive:true}));
+  onScroll();
+})();
 </script>
 </body>
 </html>
