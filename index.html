@@ -101,6 +101,10 @@ h2::after{content:"";display:block;width:36px;height:3px;border-radius:2px;margi
 .gh{border-color:var(--c2);color:var(--c2);background:var(--bg)}
 .gh:hover{background:var(--c2);color:#fff}
 @media (max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+.newpub{border:1px solid color-mix(in srgb,var(--c2) 35%,var(--line));border-left:4px solid var(--c2);background:color-mix(in srgb,var(--c2) 7%,var(--bg));border-radius:0 10px 10px 0;padding:12px 16px;margin:4px 0 16px}
+.newpub .badge{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--c2);border-radius:999px;padding:1px 9px;margin-bottom:6px}
+.newpub .t{font-weight:500}
+.newpub .m{color:var(--muted);font-size:14.5px}
 footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 @media (max-width:600px){.profile{grid-template-columns:1fr;text-align:left}.profile img{width:120px;height:120px}h1{font-size:28px}.when{display:block;min-width:0}}
 </style>
@@ -170,6 +174,7 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <section id="publications">
 <h2>Publications</h2>
 <p class="sub"><span id="pubcount">99</span> publications · updated automatically every week from ORCID · also on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a> and <a href="https://scholar.google.com/citations?user=LjqT4OEAAAAJ&amp;hl=en">Google Scholar</a></p>
+<div class="newpub"><span class="badge">New preprint · Oct 2026</span><div class="t"><a href="https://doi.org/10.20944/preprints202610.2479.v1">LLM-Based Agentic AI in Manufacturing: A Scoping Review of Applications, System Designs and Evaluation Practices</a></div><div class="m">N. Moradzadeh Farid, S. Shafiee · Preprints.org · A review of 164 studies on LLM agents in manufacturing, their system designs and how they are evaluated.</div></div>
 <div class="tools"><input id="q" type="search" placeholder="Search title, venue or co-author" aria-label="Search publications"><div id="chips" class="chips"></div></div>
 <div id="publist"><p class="sub">Loading publications…</p></div>
 </section>
