@@ -105,6 +105,7 @@ h2::after{content:"";display:block;width:36px;height:3px;border-radius:2px;margi
 .newpub .badge{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--c2);border-radius:999px;padding:1px 9px;margin-bottom:6px}
 .newpub .t{font-weight:500}
 .newpub .m{color:var(--muted);font-size:14.5px}
+.tag.pre{background:var(--c2);border-color:var(--c2);color:#fff;font-weight:600}
 footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 @media (max-width:600px){.profile{grid-template-columns:1fr;text-align:left}.profile img{width:120px;height:120px}h1{font-size:28px}.when{display:block;min-width:0}}
 </style>
@@ -174,7 +175,6 @@ footer{max-width:860px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);f
 <section id="publications">
 <h2>Publications</h2>
 <p class="sub"><span id="pubcount">99</span> publications · updated automatically every week from ORCID · also on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a> and <a href="https://scholar.google.com/citations?user=LjqT4OEAAAAJ&amp;hl=en">Google Scholar</a></p>
-<div class="newpub"><span class="badge">New preprint · Oct 2026</span><div class="t"><a href="https://doi.org/10.20944/preprints202610.2479.v1">LLM-Based Agentic AI in Manufacturing: A Scoping Review of Applications, System Designs and Evaluation Practices</a></div><div class="m">N. Moradzadeh Farid, S. Shafiee · Preprints.org · A review of 164 studies on LLM agents in manufacturing, their system designs and how they are evaluated.</div></div>
 <div class="tools"><input id="q" type="search" placeholder="Search title, venue or co-author" aria-label="Search publications"><div id="chips" class="chips"></div></div>
 <div id="publist"><p class="sub">Loading publications…</p></div>
 </section>
@@ -262,14 +262,18 @@ let D=FALLBACK, theme="all";
 const COL={ai:"--c2",rec:"--c3",pcs:"--c1",agile:"--c4",aec:"--c5",org:"--c6",other:"--c7"};
 const kv=k=>COL[k]?' style="--k:var('+COL[k]+')"':"";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function link(p){return p.doi?"https://doi.org/"+p.doi:"https://scholar.google.com/scholar?q="+encodeURIComponent('"'+p.t+'"')}
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,"");
+const EXTRA=[{t:"LLM-Based Agentic AI in Manufacturing: A Scoping Review of Applications, System Designs and Evaluation Practices",y:2026,v:"Preprints.org",a:["N. Moradzadeh Farid","S. Shafiee"],j:false,pre:true,th:"ai",url:"https://www.preprints.org/manuscript/202610.2479"}];
+const DOIS={};[["Agentic Data Analysis for Intelligent Manufacturing: Benchmark-Driven Evaluation of Agentic vs. Direct LLM Approaches","10.1016/j.procir.2025.09.043"],["Synthetic data generation in manufacturing: a review of methods, domains, and emerging trends","10.1016/j.procir.2025.08.199"],["Teachers' Evaluation of the ILI High Intermediate Book Series through an Eclectic Checklist","10.17507/tpls.0809.09"],["Automatic Identification of Similarities Across Products to Improve the Configuration Process in ETO Companies","10.24867/ijiem-2017-3-117"],["How to Identify Possible Applications of Product Configuration Systems in Engineer-to-Order Companies","10.24867/ijiem-2017-3-116"],["Product configuration system and its impact on product's life cycle complexity","10.1109/ieem.2016.7797960"],["Goal-Oriented Data Collection Framework in Configuration Projects","10.1007/978-3-319-29058-4_28"],["Scoping a product configuration project for engineer-to-order companies","10.24867/ijiem-2014-4-122"]].forEach(([t,d])=>DOIS[norm(t)]=d);
+function merge(){const have=new Set(D.pubs.map(p=>norm(p.t)));EXTRA.slice().reverse().forEach(x=>{if(!have.has(norm(x.t)))D.pubs.unshift(x);});}
+function link(p){if(p.url)return p.url;const d=p.doi||DOIS[norm(p.t)];if(d)return "https://doi.org/"+d;if(p.code)return p.code;return "https://orbit.dtu.dk/en/publications/?search="+encodeURIComponent(p.t)}
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=D.pubs.filter(p=>(theme==="all"||p.th===theme)&&(!q||(p.t+" "+p.v+" "+(p.a||[]).join(" ")).toLowerCase().includes(q))).sort((a,b)=>b.y-a.y);
   let html="",y=null;
   for(const p of list){
     if(p.y!==y){if(y!==null)html+="</ul>";y=p.y;html+='<div class="yr">'+y+'</div><ul class="pubs">';}
-    html+='<li'+kv(p.th)+'><div class="t"><a href="'+link(p)+'">'+esc(p.t)+'</a>'+(p.j?'<span class="tag">Journal</span>':'')+'</div><div class="m">'+esc((p.a||[]).join(", "))+(p.v?" · "+esc(p.v):"")+(p.code?' · <a href="'+esc(p.code)+'">code</a>':"")+'</div></li>';
+    html+='<li'+kv(p.th)+'><div class="t"><a href="'+link(p)+'">'+esc(p.t)+'</a>'+(p.pre?'<span class="tag pre">Preprint · new</span>':p.j?'<span class="tag">Journal</span>':'')+'</div><div class="m">'+esc((p.a||[]).join(", "))+(p.v?" · "+esc(p.v):"")+(p.code?' · <a href="'+esc(p.code)+'">code</a>':"")+'</div></li>';
   }
   if(y!==null)html+="</ul>";
   document.getElementById("publist").innerHTML=html||'<p class="sub">No matches.</p>';
@@ -284,7 +288,7 @@ document.getElementById("chips").addEventListener("click",e=>{const b=e.target.c
 document.getElementById("q").addEventListener("input",render);
 document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{theme=b.dataset.k;chips();render();document.getElementById("publications").scrollIntoView();}));
 const FAIL='<p class="sub">Could not load the list right now. See all publications on <a href="https://orbit.dtu.dk/en/persons/sara-shafiee/publications/">DTU Orbit</a>.</p>';
-fetch(SRC,{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.pubs&&d.pubs.length){D=d;chips();render();}else document.getElementById("publist").innerHTML=FAIL}).catch(()=>{document.getElementById("publist").innerHTML=FAIL});
+fetch(SRC,{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.pubs&&d.pubs.length){D=d;merge();chips();render();}else document.getElementById("publist").innerHTML=FAIL}).catch(()=>{document.getElementById("publist").innerHTML=FAIL});
 
 (function(){
   const links=[...document.querySelectorAll('.nav a.l[href^="#"]')];
